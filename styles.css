@@ -1,0 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    margin: 50px;
+    border: 1px solid black;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+#timer {
+    font-size: 4rem;
+    margin: 20px;
+}
+button {
+    font-size: 2rem;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+}
