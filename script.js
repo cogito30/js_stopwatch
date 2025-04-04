@@ -52,3 +52,10 @@ function formatTime(timeInMs) {
     let ms = timeInMs % 1000;
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${String(ms).padStart(3, '0')}`;
 }
+
+const startButton = document.querySelector("#start-button");
+const stopButton = document.querySelector("#stop-button");
+const resetButton = document.querySelector("#reset-button");
+startButton.onclick = startTimer;
+stopButton.onclick = stopTimer;
+resetButton.onclick = resetTimer;
