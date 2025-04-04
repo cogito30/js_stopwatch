@@ -17,4 +17,4 @@ git clone https://github.com/cogito30/js_stopwatch.git
 
 ## Result
 ![Stopwatch 결과물1](./result1.png)
-![Stopwatch 결과물2]()
+![Stopwatch 결과물2](./result2.png)
