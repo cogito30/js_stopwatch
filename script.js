@@ -87,9 +87,36 @@ function resetRecords() {
     }
 }
 
+function saveRecords() {
+    let recordsText = '';
+    document.querySelectorAll('.record-date').forEach(dateSection => {
+        recordsText += dateSection.querySelector('strong').textContent + "\n";
+        recordsText += "Lap No | Split | Total\n";
+        dateSection.querySelectorAll('tbody tr').forEach(row => {
+            recordsText += row.children[0].textContent + " | " + row.children[1].textContent + " | " + row.children[2].textContent + "\n";
+        });
+        recordsText += "\n";
+    });
+    
+    let blob = new Blob([recordsText], { type: 'text/plain' });
+    let a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'stopwatch_records.txt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
 const startButton = document.querySelector("#start-button");
 const stopButton = document.querySelector("#stop-button");
 const resetButton = document.querySelector("#reset-button");
 startButton.onclick = startTimer;
 stopButton.onclick = stopTimer;
 resetButton.onclick = resetTimer;
+
+const recordButton = document.querySelector("#record-button");
+const recordResetButton = document.querySelector("#record-reset-button");
+const recordSaveButton = document.querySelector("#record-save-button");
+recordButton.onclick = recordTime;
+recordResetButton.onclick = resetRecords;
+recordSaveButton.onclick = saveRecords;
