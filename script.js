@@ -1,6 +1,9 @@
 let timer;
 let milliseconds = 0, seconds = 0, minutes = 0, hours = 0;
 let isRunning = false;
+let lapCounter = 0;
+let lastRecordedTime = 0;
+let recordList = document.getElementById('record-list');
 
 function startTimer() {
     if (!isRunning) {
@@ -20,6 +23,9 @@ function resetTimer() {
     seconds = 0;
     minutes = 0;
     hours = 0;
+    isRunning = false;
+    lapCounter = 0;
+    lastRecordedTime = 0;
     updateDisplay();
 }
 
@@ -51,6 +57,34 @@ function formatTime(timeInMs) {
     let s = Math.floor((timeInMs % 60000) / 1000);
     let ms = timeInMs % 1000;
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}.${String(ms).padStart(3, '0')}`;
+}
+
+function recordTime() {
+    let currentTime = hours * 3600000 + minutes * 60000 + seconds * 1000 + milliseconds;
+    let splitTime = currentTime - lastRecordedTime;
+    lastRecordedTime = currentTime;
+    lapCounter++;
+    
+    let currentDate = new Date().toLocaleDateString();
+    let dateSection = document.getElementById(`date-${currentDate}`);
+    if (!dateSection) {
+        dateSection = document.createElement('div');
+        dateSection.id = `date-${currentDate}`;
+        dateSection.classList.add('record-date');
+        dateSection.innerHTML = `<strong>${currentDate}</strong><table><thead><tr><th>Lap No</th><th>Split</th><th>Total</th></tr></thead><tbody></tbody></table>`;
+        recordList.appendChild(dateSection);
+    }
+    
+    let tbody = dateSection.querySelector('tbody');
+    let row = document.createElement('tr');
+    row.innerHTML = `<td>${lapCounter}</td><td>${formatTime(splitTime)}</td><td>${formatTime(currentTime)}</td>`;
+    tbody.appendChild(row);
+}
+
+function resetRecords() {
+    if (!isRunning) {
+        recordList.innerHTML = '';
+    }
 }
 
 const startButton = document.querySelector("#start-button");
