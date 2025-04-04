@@ -16,4 +16,5 @@ git clone https://github.com/cogito30/js_stopwatch.git
 2) index.html를 브라우저로 열기
 
 ## Result
-![Stopwatch 결과물]()
+![Stopwatch 결과물1](./result1.png)
+![Stopwatch 결과물2]()
